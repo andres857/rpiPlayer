@@ -10,16 +10,35 @@ async function monitoring(){
         memory,
         temperature,
         currentload,
-	load:{
-	   avgload,
-	   currentload	
-	},    
-	currentTime: si.time(), 
+	    load:{
+	        avgload,
+	        currentload	
+	    },    
+	    currentTime: si.time(), 
     }
-        //console.log(monitor);
+    console.log(monitor.currentTime);
 	return monitor;
-
 }
+
+async function statusplayer(){
+    // scope function
+    let {main} = await si.cpuTemperature();
+    // let temperature = temperatureobj.main;
+    let {avgload,currentload} = await si.currentLoad();
+    let {current,uptime} =  si.time()
+
+    status = {
+        main,
+        avgload,
+        currentload,
+        current,
+        uptime
+    }
+    
+	return status;
+}
+
+
 
 async function device(){
     let osinfo = await si.osInfo();
@@ -40,6 +59,7 @@ module.exports ={
     
    monitoring,
    device,
+   statusplayer
 }
 
 
