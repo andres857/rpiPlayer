@@ -1,40 +1,45 @@
 const si = require('systeminformation')
 
-async function sendData(){
+async function monitoring(){
     // scope function
-    let networkInterfaces = await si.networkInterfaces();
     let temperature = await si.cpuTemperature();
-    let cpu = await si.cpu();
     let memory = await si.mem();
-    let graphics = await si.graphics();
-    let disk = await si.diskLayout();
-    let osinfo = await si.osInfo()
-    let currentLoad = await si.currentLoad();
-    let chassis = await si.chassis();
-    
+    let {avgload,currentload}=await si.currentLoad();
+
+    monitor = {
+        memory,
+        temperature,
+        currentload,
+	load:{
+	   avgload,
+	   currentload	
+	},    
+	currentTime: si.time(), 
+    }
+        //console.log(monitor);
+	return monitor;
+
+}
+
+async function device(){
+    let osinfo = await si.osInfo();
+    let cpu = await si.cpu();
+    let networkInterfaces = await si.networkInterfaces();
 
     device = {
         osinfo,
         cpu,
-        memory,
-        disk,
-        graphics,
-        temperature,
-        currentLoad,
         networkInterfaces,
-        chassis
     }
-    // console.log(device);
+    //console.log(device);
     return device;
 }
-
                     
 
-let currentTime = si.time()
-
 module.exports ={
-    currentTime,
-    sendData
+    
+   monitoring,
+   device,
 }
 
 
