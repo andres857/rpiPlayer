@@ -3,7 +3,6 @@ const si = require("../infoSystem.js")
 const {client, topics} = require('../broker');
 
 
-
 async function sendinfodevice(){
     device = await si.device();    
     client.on('connect', function () {
@@ -16,11 +15,6 @@ async function sendinfodevice(){
 async function toweb(){
     let status = await si.statusplayer();   
     console.log(status);
-
-    
-    
-    
-
     client.on('connect', function () {
     // client.publish(topics.monitoring,monitor.temperature.main.toString());
     // client.publish(topics.monitoring,monitor.currentTime.current.toString());

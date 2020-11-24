@@ -1,4 +1,4 @@
-const si = require('systeminformation')
+const si = require('systeminformation');
 
 async function monitoring(){
     // scope function
@@ -28,6 +28,7 @@ async function statusplayer(){
     let {current,uptime} =  si.time()
 
     status = {
+	//channel,    
         main,
         avgload,
         currentload,
@@ -59,7 +60,8 @@ module.exports ={
     
    monitoring,
    device,
-   statusplayer
+   statusplayer,
+   
 }
 
 

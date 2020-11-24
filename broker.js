@@ -5,9 +5,16 @@ const mqtt = require('mqtt');
 const client  = mqtt.connect('mqtt://165.227.2.248');
 
 const topics = {
-    device:'/players/device',
-    monitoring:'/players/monitoring'
+	suscriber:{
+		config:'/imbanaco/players/restart'
+	},
+	publish:{
+		channel:'/imbanaco/channel',
+		temp: '/imbanaco/players/temperature'
+	}
 }
+
+
 
 module.exports={
     client,
