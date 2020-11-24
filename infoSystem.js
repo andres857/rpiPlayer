@@ -1,5 +1,8 @@
 const si = require('systeminformation');
 
+
+
+
 async function monitoring(){
     // scope function
     let temperature = await si.cpuTemperature();
@@ -23,12 +26,10 @@ async function monitoring(){
 async function statusplayer(){
     // scope function
     let {main} = await si.cpuTemperature();
-    // let temperature = temperatureobj.main;
     let {avgload,currentload} = await si.currentLoad();
-    let {current,uptime} =  si.time()
+    let {current,uptime} =  si.time();
 
     status = {
-	//channel,    
         main,
         avgload,
         currentload,
@@ -61,7 +62,6 @@ module.exports ={
    monitoring,
    device,
    statusplayer,
-   
 }
 
 

@@ -6,11 +6,11 @@ const client  = mqtt.connect('mqtt://165.227.2.248');
 
 const topics = {
 	suscriber:{
-		config:'/imbanaco/players/restart'
+		config:'/imbanaco/players/config'
 	},
 	publish:{
-		channel:'/imbanaco/channel',
-		temp: '/imbanaco/players/temperature'
+		channel:'/imbanaco/players/channel',
+		temp: '/imbanaco/players/status'
 	}
 }
 
