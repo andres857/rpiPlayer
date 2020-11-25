@@ -20,8 +20,9 @@ async function statusPlayer(){
     let status = await si.statusplayer();  
 
     client.on('connect', function () {
-      console.log(`publicando en el tema ${topics.publish.channel} el canal ${channels.Comercial.nombre}`);	    
-      client.publish(topics.publish.channel, channels.Comercial.nombre.toString());
+      //console.log(`publicando en el tema ${topics.publish.channel} el canal ${channels.Comercial.nombre}`);	    
+      client.publish(topics.publish.channel, JSON.stringify(status));
+	console.log(status);    
       client.end()
     });
 }
