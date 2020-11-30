@@ -6,11 +6,10 @@ const channels = require('./channels');
 
 async function statusPlayer(){
     let status = await si.statusplayer();  
-
     client.on('connect', function () {
-      //console.log(`publicando en el tema ${topics.publish.channel} el canal ${channels.Comercial.nombre}`);	    
+    //console.log(`publicando en el tema ${topics.publish.channel} el canal ${channels.Comercial.nombre}`);	    
       client.publish(topics.publish.channel, JSON.stringify(status));
-	    console.log(status);    
+      console.log(status);    
       client.end()
     });
 }

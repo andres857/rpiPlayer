@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async-mqtt": "^2.6.1",
+    "media-player-controller": "^1.5.3",
     "mqtt": "^4.2.5",
     "systeminformation": "^4.30.1"
   }
