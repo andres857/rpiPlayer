@@ -1,4 +1,4 @@
-const url_Streaming = 'https://www.youtube.com/watch?v=FWyiKvPg1oo'
+const url_Streaming = 'https://rtmp.windowschannel.us/hls/iptv.m3u8'
 
 const channels={
     Comercial:{
