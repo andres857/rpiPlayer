@@ -19,4 +19,6 @@ async function statusPlayer(){
 
 //statusPlayer();
 
+//playChannel(channels.Comercial.url);
 
+//statusPlayer();
