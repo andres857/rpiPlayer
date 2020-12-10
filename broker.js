@@ -1,34 +1,61 @@
-// iniciar la conexion con el broker
-// datos de la autenticacion con el broker si la hay
-
 const mqtt = require("mqtt");
-const client = mqtt.connect("mqtt://165.227.2.248");
+const {id} = require('./device');
 
-const topics = {
-	suscriber:{
-		config:'imbanaco/players/config',
-		channel:'imbanaco/players/channel',
-	},
-	publish:{
-		status: 'imbanaco/players/status'
-	}
+
+const options = {
+  connectTimeout:4000,
+  // clientId:'test',
+  username:'emqx',
+  password: 'public',
+  keepalive:60,
+  clean:true
+
+}
+
+const client = mqtt.connect("mqtt://broker.windowschannel.us",options);
+
+async function main(){
+  const idPlayer = await id();
+
+  const topics = {
+    suscriber:{
+      config:`imbanaco/players/${idPlayer}/config`,
+      channel:`imbanaco/players/${idPlayer}/channel`,
+    },
+    publish:{
+      status: `imbanaco/players/${idPlayer}/status`
+    }
+  }
+  return topics;
 }
 
 client.on('connect', function () {
-    client.subscribe(topics.suscriber.channel, function (err) {
-      if (!err) {
-        console.log(`conexion successfull to topic ${topics.suscriber.channel}`);
-      }
-    })
+  console.log(`Client Connected`);
 })
 
-client.on('message',function(topic, message){
-    let channel = message.toString();
-    console.log(channel);
-    return channel;
+if(!client.connected){
+  console.log(`Client not Connected`);
+}
+
+client.on('message',function(topic, payload){
+  console.log(`received from ${topic} : ${payload.toString()}`);
+  if (payload == 'restart'){
+    shutdown(function(output){
+    console.log(output);
+    // console.log('[[[[[[[[[[[[[[[[[Simulando reinicio]]]]]]]]]]]]]]]]]]');
+    });
+  }else{
+    console.log(`sin reiniciar`);
+  }
 });
+
+
+
 
 module.exports={
     client,
-    topics
+    topic:main,
 }
+
+
+

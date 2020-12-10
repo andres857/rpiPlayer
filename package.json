@@ -12,6 +12,7 @@
   "dependencies": {
     "async-mqtt": "^2.6.1",
     "media-player-controller": "^1.5.3",
+    "mongoose": "^5.11.5",
     "mqtt": "^4.2.5",
     "systeminformation": "^4.30.1"
   }

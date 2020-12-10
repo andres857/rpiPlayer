@@ -1,24 +1,27 @@
-const si = require("./infoSystem.js");
+const si = require("./device.js");
 const {client, topics} = require('./broker.js');
-const {playChannel} = require ('./controller/player');
-const channels = require('./channels');
+const {player} = require ('./controller/player');
+const pub = require ('./publications');
+const sub = require ('./subscriptions')
+const db = require('./db');
 
 
-async function statusPlayer(){
-    let status = await si.statusplayer();  
-    client.on('connect', function () {
-    //console.log(`publicando en el tema ${topics.publish.channel} el canal ${channels.Comercial.nombre}`);	    
-      client.publish(topics.publish.channel, JSON.stringify(status));
-      console.log(status);    
-      client.end()
-    });
+
+async function main(){
+  await db('mongodb+srv://desarrollo:xSaTdGjM2AIWvVDJ@iptv.ywncf.mongodb.net/players?retryWrites=true&w=majority');
+
+  player.launch(err => {
+    if(err) return console.error(err.message);
+    console.log('Media player launched');
+  });
 }
 
 
-//playChannel(channels.Comercial.url);
+main();
 
-//statusPlayer();
 
-//playChannel(channels.Comercial.url);
 
-//statusPlayer();
+
+
+
+

@@ -1,20 +1,17 @@
 const si = require('systeminformation');
 
 async function statusplayer(){
-    // scope function
     let {main} = await si.cpuTemperature();
     let {avgload,currentload} = await si.currentLoad();
     let {current,uptime} =  si.time();
 
-    status = {
+    return status = {
         main,
         avgload,
         currentload,
         current,
         uptime
     }
-    
-	return status;
 }
 
 async function player () {
@@ -22,22 +19,23 @@ async function player () {
     let cpu = await si.cpu();
     let networkInterfaces = await si.networkInterfaces();
 
-    status = {
+    return status = {
         osinfo,
         cpu,
         networkInterfaces,
     }
-    return status;
 }
 
-async function getid(){
-    let {serial} = await si.osInfo();
-    return serial;
+async function id(){
+    let networkInterfaces = await si.networkInterfaces();
+    return networkInterfaces[1].mac;
 }
+
+
 
 
 module.exports ={
-    id:getid,
+    id,
     statusplayer,
 }
 

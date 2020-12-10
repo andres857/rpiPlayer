@@ -1,6 +1,6 @@
 
 const PlayerController = require('media-player-controller');
-const {url_Streaming} = require('../channels');
+const url_Streaming = 'https://rtmp.windowschannel.us/hls/iptv.m3u8'
 
 var player = new PlayerController({
   app: 'vlc',
@@ -16,10 +16,17 @@ player.on('playback-started', () => {
 
 player.on('app-exit', (code) => {
   console.log(`Media player closed. Exit code: ${code}`);
+  if(code == 0){
+    player.launch(err => {
+      if(err) return console.error(err.message);
+      console.log('Media player launched');
+    });
+  }
 });
 
-player.launch(err => {
-  if(err) return console.error(err.message);
-  console.log('Media player launched');
-});
+
+
+module.exports={
+  player
+}
 
