@@ -10,10 +10,10 @@ const db = require('./db');
 async function main(){
   await db('mongodb+srv://desarrollo:xSaTdGjM2AIWvVDJ@iptv.ywncf.mongodb.net/players?retryWrites=true&w=majority');
 
-  // player.launch(err => {
-  //   if(err) return console.error(err.message);
-  //   console.log('Media player launched');
-  // });
+  player.launch(err => {
+    if(err) return console.error(err.message);
+    console.log('Media player launched');
+  });
 }
 
 

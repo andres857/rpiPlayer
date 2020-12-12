@@ -33,16 +33,9 @@ async function main(){
     console.log(`received from ${topic} : ${payload.toString()}`)
     let message = JSON.parse(payload)
       if (message.restart=="true"){
-        // shutdown(function(output){
-        // console.log(output);
-        // });
-        console.log('Simulando Reinicio 1')
-      }else if(message.itsconnected == 'false'){
-        console.log('---------Cliente Conectado-------');
-        // console.log(topics);
-        client.publish(topics.publish.connected, '{"itsconnected":"true"}',(e)=>{
-          console.log(e || 'Publish Success to topic', topics.publish.connected);
-      });
+        shutdown(function(output){
+        console.log(output);
+        });
       }else{
         console.log('Peticiones no validas');
       }
