@@ -2,15 +2,14 @@ const mqtt = require("mqtt");
 const {id} = require('./device');
 const {shutdown} = require('./controller/device')
 
-
+const clientTV = 'imbanaco' 
 const options = {
   connectTimeout:4000,
-  // clientId:'test',
+  clientId:`${clientTV}_player_0a:1b:d6:61:7e:88`,
   username:'emqx',
   password: 'public',
   keepalive:60,
   clean:true
-
 }
 
 const client = mqtt.connect("mqtt://broker.windowschannel.us",options);
