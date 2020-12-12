@@ -29,17 +29,7 @@ async function main(){
     }
   }
 
-  client.on('message',function(topic, payload){
-    console.log(`received from ${topic} : ${payload.toString()}`)
-    let message = JSON.parse(payload)
-      if (message.restart=="true"){
-        shutdown(function(output){
-        console.log(output);
-        });
-      }else{
-        console.log('Peticiones no validas');
-      }
-  });
+  
   return topics;
 }
 
@@ -50,6 +40,18 @@ client.on('connect', function () {
 if(!client.connected){
   console.log(`Client not Connected`);
 }
+
+client.on('message',function(topic, payload){
+  console.log(`received from ${topic} : ${payload.toString()}`)
+  let message = JSON.parse(payload)
+    if (message.restart=="true"){
+      shutdown(function(output){
+      console.log(output);
+      });
+    }else{
+      console.log('Peticiones no validas');
+    }
+});
 
 
 
