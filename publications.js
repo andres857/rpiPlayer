@@ -1,13 +1,14 @@
 const {statusplayer} = require('./device');
 const {client,topic} = require('./broker');
 
-const interval = 2000;
+const interval = 3000;
+
 
 async function publish(){
     const topics = await topic();
 
     const status = await statusplayer();
-    // console.log(status);
+    console.log(status);
     client.publish(topics.publish.status, JSON.stringify(status),(e)=>{
         console.log(e || 'Publish Success to topic', topics.publish.status);
     });

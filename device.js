@@ -2,15 +2,20 @@ const si = require('systeminformation');
 
 async function statusplayer(){
     let {main} = await si.cpuTemperature();
+    
     let {avgload,currentload} = await si.currentLoad();
-    let {current,uptime} =  si.time();
+    let {current} =  si.time();
+
+    temp = main;
+    avgload = avgload*100;
+    avgload = avgload.toFixed()
+    currentload = currentload.toFixed(2)
+    current = current/1000;
 
     return status = {
-        main,
+        temp,
         avgload,
         currentload,
-        current,
-        uptime
     }
 }
 

@@ -22,11 +22,32 @@ async function main(){
     suscriber:{
       config:`imbanaco/players/${idPlayer}/config`,
       channel:`imbanaco/players/${idPlayer}/channel`,
+      connected:`imbanaco/players/${idPlayer}`
     },
     publish:{
-      status: `imbanaco/players/${idPlayer}/status`
+      status: `imbanaco/players/${idPlayer}/status`,
+      connected:`imbanaco/players/${idPlayer}`
     }
   }
+
+  client.on('message',function(topic, payload){
+    console.log(`received from ${topic} : ${payload.toString()}`)
+    let message = JSON.parse(payload)
+      if (message.restart=="true"){
+        // shutdown(function(output){
+        // console.log(output);
+        // });
+        console.log('Simulando Reinicio 1')
+      }else if(message.itsconnected == 'false'){
+        console.log('---------Cliente Conectado-------');
+        // console.log(topics);
+        client.publish(topics.publish.connected, '{"itsconnected":"true"}',(e)=>{
+          console.log(e || 'Publish Success to topic', topics.publish.connected);
+      });
+      }else{
+        console.log('Peticiones no validas');
+      }
+  });
   return topics;
 }
 
@@ -37,18 +58,6 @@ client.on('connect', function () {
 if(!client.connected){
   console.log(`Client not Connected`);
 }
-
-client.on('message',function(topic, payload){
-  console.log(`received from ${topic} : ${payload.toString()}`);
-  if (payload == 'restart'){
-    shutdown(function(output){
-    console.log(output);
-    // console.log('[[[[[[[[[[[[[[[[[Simulando reinicio]]]]]]]]]]]]]]]]]]');
-    });
-  }else{
-    console.log(`sin reiniciar`);
-  }
-});
 
 
 

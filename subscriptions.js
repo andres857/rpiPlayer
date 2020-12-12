@@ -14,6 +14,12 @@ async function subs(){
             console.log(`subscription successfull to topic ${topics.suscriber.channel}`);
         }
     })
+
+    client.subscribe(topics.suscriber.connected, function (err) {
+      if (!err) {
+          console.log(`subscription successfull to topic ${topics.suscriber.connected}`);
+      }
+  })
 }
 
 subs();
