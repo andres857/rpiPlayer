@@ -1,8 +1,8 @@
 
 const PlayerController = require('media-player-controller');
-// const url_Streaming = 'https://rtmp.windowschannel.us/hls/iptv.m3u8'
+const url_Streaming = 'https://rtmp.windowschannel.us/hls/iptv.m3u8'
 
-const url_Streaming = 'rtsp://192.168.0.123/imbanacoTV'
+//const url_Streaming = 'rtsp://192.168.0.123/imbanacoTV'
 
 var player = new PlayerController({
   app: 'vlc',

@@ -5,7 +5,7 @@ const {shutdown} = require('./controller/device')
 const clientTV = 'imbanaco' 
 const options = {
   connectTimeout:4000,
-  clientId:`${clientTV}_player_0a:1b:d6:61:7e:88`,
+  clientId:`${clientTV}_player_a2:c5:9f:82:74:82`,
   username:'emqx',
   password: 'public',
   keepalive:60,

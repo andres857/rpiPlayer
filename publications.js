@@ -2,7 +2,7 @@ const {statusplayer} = require('./device');
 const {client,topic} = require('./broker');
 
 
-const interval = 60000;
+const interval = 10000;
 
 
 async function publish(){
