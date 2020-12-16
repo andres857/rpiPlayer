@@ -26,6 +26,11 @@ player.on('app-exit', (code) => {
   }
 });
 
+player.launch(err => {
+  if(err) return console.error(err.message);
+  console.log('Media player launched');
+});
+
 
 
 module.exports={

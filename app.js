@@ -7,21 +7,13 @@ const sub = require ('./subscriptions')
 
 
 
-async function main(){
-  // await db('mongodb+srv://desarrollo:xSaTdGjM2AIWvVDJ@iptv.ywncf.mongodb.net/players?retryWrites=true&w=majority');
+// async function main(){
+//   // await db('mongodb+srv://desarrollo:xSaTdGjM2AIWvVDJ@iptv.ywncf.mongodb.net/players?retryWrites=true&w=majority');
 
-  try {
-    player.launch(err => {
-      if(err) return console.error(err.message);
-      console.log('Media player launched');
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
+// }
 
 
-main();
+// main();
 
 
 
