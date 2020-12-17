@@ -1,6 +1,7 @@
 const mqtt = require("mqtt");
-const {id} = require('./device');
-const {shutdown} = require('./controller/device')
+const {statusplayer} = require('./device');
+const {shutdown} = require('./controller/device');
+const player = require("./controller/player");
 
 const clientTV = 'imbanaco' 
 const options = {
@@ -12,26 +13,41 @@ const options = {
   clean:true
 }
 
-const client = mqtt.connect("mqtt://broker.windowschannel.us",options);
+ client = mqtt.connect("mqtt://broker.windowschannel.us",options);
 
-async function main(){
-  const idPlayer = await id();
-
-  const topics = {
-    suscriber:{
-      config:`imbanaco/players/${idPlayer}/config`,
-      channel:`imbanaco/players/${idPlayer}/channel`,
-      connected:`imbanaco/players/${idPlayer}`
-    },
-    publish:{
-      status: `imbanaco/players/${idPlayer}/status`,
-      connected:`imbanaco/players/${idPlayer}`
+  async function main(){
+    try {
+      const {idPlayer} = await statusplayer();
+      const topics = {
+        suscriber:{
+          config:`imbanaco/players/${idPlayer}/config`,
+          channel:`imbanaco/players/${idPlayer}/channel`,
+          connected:`imbanaco/players/${idPlayer}`
+        },
+        publish:{
+          status: `imbanaco/players/${idPlayer}/status`,
+          connected:`imbanaco/players/${idPlayer}`
+        }
+      }
+      return topics;
+    } catch (error) {
+      const idPlayer = ''
+      console.error('cant get id of Player', error);
+      const topics = {
+        suscriber:{
+          config:`imbanaco/players/${idPlayer}/config`,
+          channel:`imbanaco/players/${idPlayer}/channel`,
+          connected:`imbanaco/players/${idPlayer}`
+        },
+        publish:{
+          status: `imbanaco/players/${idPlayer}/status`,
+          connected:`imbanaco/players/${idPlayer}`
+        }
+      }
+      return topics;
     }
   }
 
-  
-  return topics;
-}
 
 client.on('connect', function () {
   console.log(`Client Connected`);
@@ -39,7 +55,12 @@ client.on('connect', function () {
 
 if(!client.connected){
   console.log(`Client not Connected`);
+  player.player.quit() 
 }
+
+client.on('reconnect',function(){
+  console.log('reconectando');
+})
 
 client.on('message',function(topic, payload){
   console.log(`received from ${topic} : ${payload.toString()}`)
@@ -53,6 +74,10 @@ client.on('message',function(topic, payload){
     }
 });
 
+// client.on('offline', function(){
+//   console.log('offline player');
+// })
+
 
 
 
@@ -60,6 +85,7 @@ module.exports={
     client,
     topic:main,
 }
+
 
 
 

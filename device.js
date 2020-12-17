@@ -1,25 +1,32 @@
 const si = require('systeminformation');
+const {client} = require('./broker');
 
 async function statusplayer(){
-    let {main} = await si.cpuTemperature();
-    let networkInterfaces = await si.networkInterfaces();
-    let {avgload,currentload} = await si.currentLoad();
-    let {current} =  si.time();
+    
 
-    idPlayer = networkInterfaces[1].mac
-    temp = main;
-    avgload = avgload*100;
-    avgload = avgload.toFixed()
-    currentload = currentload.toFixed(2)
-    current = current/1000;
+    try {
+        let {main} = await si.cpuTemperature();
+        let networkInterfaces = await si.networkInterfaces();
+        let {avgload,currentload} = await si.currentLoad();
 
-
-    return status = {
-        idPlayer,
-        temp,
-        avgload,
-        currentload,
+        idPlayer = networkInterfaces[1].mac
+        temp = main;
+        avgload = avgload*100;
+        avgload = avgload.toFixed()
+        currentload = currentload.toFixed(2)
+        throw {}
+        return status = {
+            idPlayer,
+            temp,
+            avgload,
+            currentload,
+        }
+        
+    } catch (error) {
+        console.log(`client`, client);
+        console.error(error);
     }
+    
 }
 
 async function player () {
@@ -33,17 +40,7 @@ async function player () {
         networkInterfaces,
     }
 }
-
-async function id(){
-    let networkInterfaces = await si.networkInterfaces();
-    return networkInterfaces[1].mac;
-}
-
-
-
-
+statusplayer();
 module.exports ={
-    id,
     statusplayer,
 }
-

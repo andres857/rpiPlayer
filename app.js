@@ -1,16 +1,19 @@
-const si = require("./device.js");
-const {client, topics} = require('./broker.js');
+const {client, topic} = require('./broker.js');
 const {player} = require ('./controller/player');
-const pub = require ('./publications');
+const publishStatusPlayer = require ('./publications');
 const sub = require ('./subscriptions')
 // const db = require('./db');
 
 
 
-// async function main(){
-//   // await db('mongodb+srv://desarrollo:xSaTdGjM2AIWvVDJ@iptv.ywncf.mongodb.net/players?retryWrites=true&w=majority');
-
-// }
+async function main(){
+  // await db('mongodb+srv://desarrollo:xSaTdGjM2AIWvVDJ@iptv.ywncf.mongodb.net/players?retryWrites=true&w=majority');
+  await client();
+  await topic();
+  await sub();
+//   await publishStatusPlayer();
+  await player();
+}
 
 
 // main();

@@ -10,10 +10,11 @@ var player = new PlayerController({
   media: url_Streaming
 });
 
-player.on('playback', console.log);
+// player.on('playback', console.log);
 
 player.on('playback-started', () => {
   console.log('Playback started. Player can now be controlled');
+  player.setVolume(0.75)
 });
 
 player.on('app-exit', (code) => {
@@ -30,6 +31,7 @@ player.launch(err => {
   if(err) return console.error(err.message);
   console.log('Media player launched');
 });
+
 
 
 

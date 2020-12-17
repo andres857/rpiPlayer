@@ -5,7 +5,7 @@ const {client,topic} = require('./broker');
 const interval = 10000;
 
 
-async function publish(){
+  async function publish(){
     const topics = await topic();
     const status = await statusplayer();
     console.log(status);
@@ -13,6 +13,8 @@ async function publish(){
         console.log(e || 'Publish Success to topic', topics.publish.status);
     });
 }
+
+
 
 async function delay(ms) {
     // return await for better async stack trace support in case of errors.
@@ -27,5 +29,12 @@ let run = async ()=>{
     }
   }
 
-run();
-module.exports = run
+  try {
+    run();
+  } catch (error) {
+    console.error(`Problema al publicar ${error}`);
+  }
+
+module.exports = {
+  publishStatusPlayer:run
+}
